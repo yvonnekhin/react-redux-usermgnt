@@ -1,12 +1,10 @@
 import axios from "axios";
 import history from "../components/history";
 import * as actionTypes from "./actionTypes";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 const apiUrl = "https://reqres.in/api/users";
 
-export const fetchUsers = () => {
+export function fetchUsers() {
   return dispatch => {
     return axios
       .get(`${apiUrl}`)
@@ -17,7 +15,7 @@ export const fetchUsers = () => {
         throw error;
       });
   };
-};
+}
 
 export const getUser = id => {
   return dispatch => {
@@ -32,7 +30,7 @@ export const getUser = id => {
   };
 };
 
-export const addUser = ({ email, first_name, last_name }) => {
+export function addUser({ email, first_name, last_name }) {
   return dispatch => {
     return axios
       .post(`${apiUrl}`, { email, first_name, last_name })
@@ -49,13 +47,13 @@ export const addUser = ({ email, first_name, last_name }) => {
         });
       })
       .then(() => {
-        history.push("/users");
+        history.push("/users/new");
       })
       .catch(error => {
         throw error;
       });
   };
-};
+}
 
 export const deleteUser = id => {
   return dispatch => {

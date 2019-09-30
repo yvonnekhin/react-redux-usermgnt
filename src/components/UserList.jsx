@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { fetchUsers } from "../actions/index";
 
 class UserList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
   render() {
     return (
       <div className="container">
@@ -41,4 +50,7 @@ class UserList extends Component {
 
 const mapStateToProps = state => ({ users: state.users });
 
-export default connect(mapStateToProps)(UserList);
+export default connect(
+  mapStateToProps,
+  { fetchUsers }
+)(UserList);

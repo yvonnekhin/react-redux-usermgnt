@@ -9,6 +9,10 @@ class UserEdit extends React.Component {
     this.props.history.push(`/users/${this.props.user.id}`);
   };
 
+  handleSubmit = values => {
+    this.props.updateUser(values);
+  };
+
   render() {
     return (
       <Formik
@@ -25,6 +29,7 @@ class UserEdit extends React.Component {
           lastName: Yup.string().required("Last Name is required")
         })}
         onSubmit={fields => {
+          this.handleSubmit(fields);
           alert("Updated user details: \n\n" + JSON.stringify(fields, null, 4));
         }}
         render={({ errors, status, touched }) => (

@@ -10,6 +10,13 @@ class UserAdd extends Component {
     this.state = { email: "", first_name: "", last_name: "" };
   }
 
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleSubmit = values => {
+    this.props.addUser(values);
+  };
+
   render() {
     return (
       <Formik
@@ -26,6 +33,7 @@ class UserAdd extends Component {
           lastName: Yup.string().required("Last Name is required")
         })}
         onSubmit={fields => {
+          this.handleSubmit(fields);
           alert(
             "New user has been created!! \n\n" + JSON.stringify(fields, null, 4)
           );
